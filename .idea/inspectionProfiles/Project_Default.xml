@@ -1,0 +1,21 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="8">
+            <item index="0" class="java.lang.String" itemvalue="pdf2image" />
+            <item index="1" class="java.lang.String" itemvalue="textract-trp" />
+            <item index="2" class="java.lang.String" itemvalue="cv2" />
+            <item index="3" class="java.lang.String" itemvalue="opencv-python" />
+            <item index="4" class="java.lang.String" itemvalue="pytesseract" />
+            <item index="5" class="java.lang.String" itemvalue="imutils" />
+            <item index="6" class="java.lang.String" itemvalue="confluent_kafka" />
+            <item index="7" class="java.lang.String" itemvalue="evdev" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

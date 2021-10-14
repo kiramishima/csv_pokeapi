@@ -1,0 +1,510 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Pokemon API Endpoints",
+    "version": "1.0.0",
+    "title": "Pokemon API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/pokemon": {
+      "get": {
+        "tags": [
+          "pokemon"
+        ],
+        "summary": "List Pokemon",
+        "description": "Paginate the results",
+        "operationId": "listPokemon",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PaginateResponse"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "pokemon"
+        ],
+        "summary": "Creates a pokemon with form data",
+        "description": "",
+        "operationId": "createPokemonWithForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "formData",
+            "description": "Updated pokemon's id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Updated pokemon's name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type_1",
+            "in": "formData",
+            "description": "Updated pokemon's type 1",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Grass",
+              "Normal",
+              "Dragon",
+              "Ice",
+              "Metal"
+            ]
+          },
+          {
+            "name": "type_2",
+            "in": "formData",
+            "description": "Updated pokemon's type 2",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Grass",
+              "Normal",
+              "Dragon",
+              "Ice",
+              "Metal"
+            ]
+          },
+          {
+            "name": "total",
+            "in": "formData",
+            "description": "Updated pokemon's total",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "hp",
+            "in": "formData",
+            "description": "Updated pokemon's hp",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "def",
+            "in": "formData",
+            "description": "Updated pokemon's defense",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "atk",
+            "in": "formData",
+            "description": "Updated pokemon's attack",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sp_atk",
+            "in": "formData",
+            "description": "Updated pokemon's special attack",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sp_def",
+            "in": "formData",
+            "description": "Updated pokemon's special defense",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "speed",
+            "in": "formData",
+            "description": "Updated pokemon's speed",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "generation",
+            "in": "formData",
+            "description": "Updated pokemon's generation",
+            "required": false,
+            "type": "string",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          {
+            "name": "legendary",
+            "in": "formData",
+            "description": "Is a pokemon legendary ?",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/pokemon/{poke_id}": {
+      "get": {
+        "tags": [
+          "pokemon"
+        ],
+        "summary": "Find pokemon by ID",
+        "description": "Returns a single pokemon",
+        "operationId": "getPokemonById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "poke_id",
+            "in": "path",
+            "description": "ID or Pokemon's Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Pokemon"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pokemon not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "pokemon"
+        ],
+        "summary": "Updates a pokemon with form data",
+        "description": "",
+        "operationId": "updatePokemonWithForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "poke_id",
+            "in": "path",
+            "description": "ID or Pokemon's Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "formData",
+            "description": "Updated pokemon's id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Updated pokemon's name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type_1",
+            "in": "formData",
+            "description": "Updated pokemon's type 1",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Grass",
+              "Normal",
+              "Dragon",
+              "Ice",
+              "Metal"
+            ]
+          },
+          {
+            "name": "type_2",
+            "in": "formData",
+            "description": "Updated pokemon's type 2",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Grass",
+              "Normal",
+              "Dragon",
+              "Ice",
+              "Metal"
+            ]
+          },
+          {
+            "name": "total",
+            "in": "formData",
+            "description": "Updated pokemon's total",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "hp",
+            "in": "formData",
+            "description": "Updated pokemon's hp",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "def",
+            "in": "formData",
+            "description": "Updated pokemon's defense",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "atk",
+            "in": "formData",
+            "description": "Updated pokemon's attack",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sp_atk",
+            "in": "formData",
+            "description": "Updated pokemon's special attack",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sp_def",
+            "in": "formData",
+            "description": "Updated pokemon's special defense",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "speed",
+            "in": "formData",
+            "description": "Updated pokemon's speed",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "generation",
+            "in": "formData",
+            "description": "Updated pokemon's generation",
+            "required": false,
+            "type": "string",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          {
+            "name": "legendary",
+            "in": "formData",
+            "description": "Is a pokemon legendary ?",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pokemon"
+        ],
+        "summary": "Deletes a pokemon",
+        "description": "",
+        "operationId": "deletePokemon",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "poke_id",
+            "in": "path",
+            "description": "ID or Pokemon's Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pokemon not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Pokemon": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type_1",
+        "total",
+        "hp",
+        "atk",
+        "def",
+        "sp_atk",
+        "sp_def",
+        "speed",
+        "generation",
+        "legendary"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type_1": {
+          "type": "string",
+          "enum": [
+            "Fire",
+            "Water",
+            "Ghost"
+          ]
+        },
+        "type_2": {
+          "type": "string",
+          "enum": [
+            "Dragon",
+            "Grass",
+            "Rock"
+          ]
+        },
+        "total": {
+          "type": "integer"
+        },
+        "hp": {
+          "type": "integer"
+        },
+        "atk": {
+          "type": "integer"
+        },
+        "def": {
+          "type": "integer"
+        },
+        "sp_atk": {
+          "type": "integer"
+        },
+        "sp_def": {
+          "type": "integer"
+        },
+        "speed": {
+          "type": "integer"
+        },
+        "generation": {
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "legendary": {
+          "type": "boolean",
+          "enum": [
+            true,
+            false
+          ]
+        }
+      },
+      "xml": {
+        "name": "Pet"
+      }
+    },
+    "PaginateResponse": {
+      "type": "object",
+      "properties": {
+        "total_records": {
+          "type": "integer"
+        },
+        "current_page": {
+          "type": "integer"
+        },
+        "max_pages": {
+          "type": "integer"
+        },
+        "per_page": {
+          "type": "integer"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pokemon"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
