@@ -12,16 +12,25 @@ app.data = pd.read_csv("./data/pokemon.csv", header=0, sep='\t',
 
 @app.route('/')
 def home():
+   """
+   This Endpoint return only the swagger documentation
+   """
    return render_template('index.html')
 
 @app.route('/api/v1/pokemon')
 def all():
+    """
+    This enpoint returns a list of pokemon paginated 
+    """
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
     resp = pagination(app.data, page, per_page)
     return jsonify(resp)
 
 def pagination(df, start_page = 1, per_page = 15):
+    """
+    Paginate function
+    """
     pagesize = per_page
     page = start_page - 1
     max_pages = math.ceil(df.shape[0] / pagesize)
@@ -36,7 +45,9 @@ def pagination(df, start_page = 1, per_page = 15):
 
 @app.route('/api/v1/pokemon/<poke_id>', methods=['GET'])
 def find(poke_id):
-    print("poke -> {}".format(poke_id))
+    """
+    This endpoint filters the dataset by id or by pokemon's name and return one result
+    """
     pfind = app.data[(app.data['id'] == poke_id) | (app.data['name'] == poke_id)]
     dtjson = json.loads(pfind.to_json(orient='records', force_ascii=False))
     resp = {'status': True, 'data': dtjson}
@@ -45,6 +56,9 @@ def find(poke_id):
 
 @app.route('/api/v1/pokemon', methods=['POST'])
 def create_pokemon():
+    """
+    Endpoint to create a new pokemon in the dataset
+    """
     form = request.form
     print(form)
     pokemon = {"id": form.get('id'), "name": form.get('name'), "type_1": form.get('type_1'),
@@ -52,7 +66,7 @@ def create_pokemon():
                "def": form.get('def'),
                "sp_atk": form.get('sp_atk'), "sp_def": form.get('sp_def'), "speed": form.get('speed'),
                "generation": form.get('generation'), "legendary": form.get('legendary')}
-    print(pokemon)
+    # print(pokemon)
     new_row = pd.Series(pokemon)
     app.data = app.data.append(new_row, ignore_index=True)
     resp = {'status': True, 'data': pokemon}
@@ -60,6 +74,9 @@ def create_pokemon():
 
 @app.route('/api/v1/pokemon/<poke_id>', methods=['POST'])
 def update_pokemon(poke_id):
+    """
+    Update pokemon endpoint
+    """
     form = request.form
     # build response
     pokemon = {"id": form.get('id'), "name": form.get('name'), "type_1": form.get('type_1'),
@@ -92,6 +109,9 @@ def update_pokemon(poke_id):
 
 @app.route('/api/v1/pokemon/<poke_id>', methods=['DELETE'])
 def delete_pokemon(poke_id):
+    """
+    Endpoint for delete a pokemon
+    """
     # find the target
     pfind = app.data.loc[(app.data['id'] == poke_id) | (app.data['name'] == poke_id)]
     # process to delete
